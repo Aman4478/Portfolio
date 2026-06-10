@@ -660,10 +660,10 @@ body{
     </div>
   </div>
   <div class="nav-links">
-    <button class="nl" onclick="showSec('about',this)">About</button>
+    <button class="nl active" onclick="showSec('about',this)">About</button>
     <button class="nl" onclick="showSec('exp',this)">Career</button>
     <button class="nl" onclick="showSec('skills',this)">Skills</button>
-    <button class="nl active" onclick="showSec('projects',this)">Projects</button>
+    <button class="nl" onclick="showSec('projects',this)">Projects</button>
   </div>
   <div style="display:flex;align-items:center;gap:10px">
     <div class="nav-live"><div class="live-dot"></div>Open to Work</div>
@@ -674,7 +674,7 @@ body{
 <div class="app-body">
 
   <!-- ═══ ABOUT ═══ -->
-  <div id="sec-about" class="sw" style="display: none;">
+  <div id="sec-about" class="sw active" style="display: block;">
     <div class="about-grid">
 
       <!-- PHOTO CARD -->
@@ -806,7 +806,7 @@ body{
   </div>
 
   <!-- ═══ PROJECTS ═══ -->
-  <div id="sec-projects" class="sw active" style="display: block;">
+  <div id="sec-projects" class="sw" style="display: none;">
     <div class="sh"><div class="sh-eye">Work</div><div class="sh-ttl">Projects</div><div class="sh-sub">Dashboards, automations &amp; data tools</div></div>
     <div class="pt">
       <div class="ftabs" id="ftabs">
@@ -1236,7 +1236,7 @@ renderProjs();
 
 <!-- ═══ MOBILE BOTTOM NAV ═══ -->
 <div class="mob-nav" id="mobNav">
-  <button class="mob-nav-item" id="mn-about" onclick="showSecMob('about','mn-about')">
+  <button class="mob-nav-item active" id="mn-about" onclick="showSecMob('about','mn-about')">
     <span class="mni">👤</span>About
   </button>
   <button class="mob-nav-item" id="mn-exp" onclick="showSecMob('exp','mn-exp')">
@@ -1245,7 +1245,7 @@ renderProjs();
   <button class="mob-nav-item" id="mn-skills" onclick="showSecMob('skills','mn-skills')">
     <span class="mni">⚡</span>Skills
   </button>
-  <button class="mob-nav-item active" id="mn-projects" onclick="showSecMob('projects','mn-projects')">
+  <button class="mob-nav-item" id="mn-projects" onclick="showSecMob('projects','mn-projects')">
     <span class="mni">📂</span>Projects
   </button>
   <button class="mob-nav-edit" id="mn-edit" onclick="toggleEditMode()">
