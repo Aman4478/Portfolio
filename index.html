@@ -532,14 +532,115 @@ body{
 .toast.err{border-left-color:var(--danger)}
 .toast.on{display:block}
 
-@media(max-width:880px){.about-grid{grid-template-columns:1fr}.photo-card{min-height:220px}.stats-col{display:grid;grid-template-columns:1fr 1fr;gap:12px}.sc-big:nth-child(3){grid-column:1/-1}}
-@media(max-width:680px){
-  .topnav{padding:0 16px;height:56px}
+/* MOBILE BOTTOM NAV */
+.mob-nav{
+  display:none;
+  position:fixed;bottom:0;left:0;right:0;z-index:400;
+  background:rgba(13,13,34,0.96);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-top:1px solid rgba(255,107,53,0.15);
+  padding:0;height:60px;
+  justify-content:space-around;align-items:stretch;
+}
+.mob-nav-item{
+  flex:1;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:3px;
+  font-size:10px;font-weight:600;color:var(--text3);
+  cursor:pointer;border:none;background:transparent;
+  font-family:var(--F);letter-spacing:0.3px;
+  transition:color 0.15s;padding:8px 0;
+  -webkit-tap-highlight-color:transparent;
+}
+.mob-nav-item.active{color:var(--accent)}
+.mob-nav-item .mni{font-size:20px;line-height:1}
+.mob-nav-edit{
+  flex:1;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:3px;
+  font-size:10px;font-weight:600;color:var(--text3);
+  cursor:pointer;border:none;background:transparent;
+  font-family:var(--F);letter-spacing:0.3px;padding:8px 0;
+  -webkit-tap-highlight-color:transparent;
+  transition:color 0.15s;
+}
+.mob-nav-edit.active{color:var(--accent)}
+.mob-nav-edit .mni{font-size:20px;line-height:1}
+
+/* TABLET */
+@media(max-width:880px){
+  .about-grid{grid-template-columns:1fr}
+  .photo-card{min-height:auto;flex-direction:row;align-items:center;padding:20px 24px;gap:20px}
+  .dp-ring{width:100px;height:100px;flex-shrink:0}
+  .dp-ring img{width:94px;height:94px}
+  .dp-name{margin-top:0;font-size:14px;text-align:left}
+  .dp-role{text-align:left;margin-bottom:12px}
+  .dp-divider{margin-bottom:10px}
+  .dp-contacts{gap:7px}
+  .stats-col{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .sc-big:nth-child(3){grid-column:1/-1}
+  .about-edu-row{grid-template-columns:1fr 1fr}
+}
+
+/* MOBILE */
+@media(max-width:640px){
+  .topnav{padding:0 14px;height:54px}
   .nav-links{display:none}
-  .app-body{padding:20px 16px}
-  .hero-card{padding:24px}
-  .modal{padding:22px}
+  .nav-sub{display:none}
+  .nav-live{display:none}
+  .edit-toggle-btn{display:none}
+
+  .mob-nav{display:flex !important}
+  .app-body{padding:16px 14px 76px}
+
+  .about-grid{grid-template-columns:1fr;gap:14px}
+  .photo-card{flex-direction:column;padding:24px 16px;text-align:center}
+  .dp-ring{width:120px;height:120px}
+  .dp-ring img{width:114px;height:114px}
+  .dp-name{text-align:center;margin-top:12px}
+  .dp-role{text-align:center}
+  .dp-contacts{align-items:flex-start}
+  .dp-cr{font-size:12px}
+  .dp-cr span,.dp-cr a{font-size:11px}
+
+  .hero-card{padding:20px}
+  .hc-name{font-size:24px}
+  .hc-bio{font-size:13px;line-height:1.7}
+
+  .stats-col{grid-template-columns:1fr 1fr;gap:10px}
+  .sc-big{padding:18px 16px}
+  .sc-num{font-size:36px}
+  .sc-lbl{font-size:9px}
+  .sc-mini .mn{font-size:22px}
+
+  .about-edu-row{grid-template-columns:1fr;gap:10px}
+  .aed-block{padding:18px}
+  .aed-ttl{font-size:13px}
+
+  .timeline{padding-left:20px}
+  .tl-dot{left:-27px;width:12px;height:12px;top:20px}
+  .exp-card{padding:18px}
+  .exp-role{font-size:16px}
+  .exp-top{flex-direction:column;gap:8px}
+  .exp-badge{align-self:flex-start}
+  .exp-ul li{font-size:13px}
+
+  .sk-grid{grid-template-columns:1fr}
+  .sk-card{padding:18px}
+
+  .pt{flex-direction:column;align-items:flex-start;gap:10px}
+  .ftabs{gap:4px;width:100%;overflow-x:auto;flex-wrap:nowrap;padding-bottom:4px}
+  .ft{padding:6px 13px;font-size:11px;white-space:nowrap}
+  .btn-add{width:100%;justify-content:center}
+  .pg{grid-template-columns:1fr}
+  .pb{padding:16px}
+
+  .modal{padding:20px;border-radius:18px;max-height:92vh}
   .f2{grid-template-columns:1fr}
+  .mbtns{flex-direction:column}
+  .bcnl,.bsave{flex:unset;width:100%}
+
+  .edit-bar{padding:10px 14px;font-size:12px}
+  .login-box{padding:28px 20px}
+  .sh-ttl{font-size:26px}
 }
 </style>
 </head>
@@ -860,11 +961,12 @@ function enterEditMode() {
   isEditMode = true;
   document.getElementById('editToggleBtn').classList.add('active');
   document.getElementById('editToggleBtn').textContent = '✏️ Editing';
+  const mnEdit = document.getElementById('mn-edit');
+  if(mnEdit){ mnEdit.classList.add('active'); mnEdit.querySelector('.mni').textContent='🔓'; }
   document.getElementById('addProjBtn').style.display = 'flex';
   document.getElementById('editBar').classList.add('show');
-  // Add padding so edit bar doesn't overlap content
   document.querySelector('.app-body').style.paddingBottom = '80px';
-  renderProjs(); // re-render to show delete buttons
+  renderProjs();
   toast('Edit mode enabled — you can now add & delete projects.');
 }
 
@@ -872,10 +974,12 @@ function exitEditMode() {
   isEditMode = false;
   document.getElementById('editToggleBtn').classList.remove('active');
   document.getElementById('editToggleBtn').textContent = '✏️ Edit';
+  const mnEdit = document.getElementById('mn-edit');
+  if(mnEdit){ mnEdit.classList.remove('active'); mnEdit.querySelector('.mni').textContent='✏️'; }
   document.getElementById('addProjBtn').style.display = 'none';
   document.getElementById('editBar').classList.remove('show');
   document.querySelector('.app-body').style.paddingBottom = '';
-  renderProjs(); // re-render to hide delete buttons
+  renderProjs();
   toast('Exited edit mode.');
 }
 
@@ -937,8 +1041,23 @@ function showSec(id, el) {
   sec.style.display = 'block';
   setTimeout(() => sec.classList.add('active'), 10);
   document.querySelectorAll('.nl').forEach(n => n.classList.remove('active'));
-  el.classList.add('active');
+  if(el) el.classList.add('active');
+  // sync mobile nav
+  document.querySelectorAll('.mob-nav-item').forEach(b => b.classList.remove('active'));
+  const mb = document.getElementById('mn-' + id);
+  if(mb) mb.classList.add('active');
   renderProjs();
+  window.scrollTo(0,0);
+}
+
+function showSecMob(id, mobBtnId) {
+  // find the matching desktop nav btn and call showSec
+  const desktopBtns = document.querySelectorAll('.nl');
+  let matchBtn = null;
+  desktopBtns.forEach(b => {
+    if(b.getAttribute('onclick') && b.getAttribute('onclick').includes("'"+id+"'")) matchBtn = b;
+  });
+  showSec(id, matchBtn);
 }
 
 function filterP(cat, el) {
@@ -1113,6 +1232,25 @@ renderProjs();
   <div class="edit-bar-right">
     <button onclick="exitEditMode()">Exit Edit Mode</button>
   </div>
+</div>
+
+<!-- ═══ MOBILE BOTTOM NAV ═══ -->
+<div class="mob-nav" id="mobNav">
+  <button class="mob-nav-item" id="mn-about" onclick="showSecMob('about','mn-about')">
+    <span class="mni">👤</span>About
+  </button>
+  <button class="mob-nav-item" id="mn-exp" onclick="showSecMob('exp','mn-exp')">
+    <span class="mni">💼</span>Career
+  </button>
+  <button class="mob-nav-item" id="mn-skills" onclick="showSecMob('skills','mn-skills')">
+    <span class="mni">⚡</span>Skills
+  </button>
+  <button class="mob-nav-item active" id="mn-projects" onclick="showSecMob('projects','mn-projects')">
+    <span class="mni">📂</span>Projects
+  </button>
+  <button class="mob-nav-edit" id="mn-edit" onclick="toggleEditMode()">
+    <span class="mni">✏️</span>Edit
+  </button>
 </div>
 
 </body></html>
